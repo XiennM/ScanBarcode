@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ScanBarcode</string>
+    <string name="previous_list_button">Список предыдущих запросов</string>
+    <string name="hand_input_button">Ввести код вручную</string>
 </resources>
