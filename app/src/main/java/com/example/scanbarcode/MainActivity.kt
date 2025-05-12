@@ -3,10 +3,8 @@ package com.example.scanbarcode
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
+import android.util.Log
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -14,14 +12,25 @@ import androidx.core.content.ContextCompat
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
 
+private const val TAG = "MainActivity"
+
 class MainActivity : AppCompatActivity() {
-    private lateinit var previousListButton: Button
-    private lateinit var handInputButton: Button
-    private lateinit var cameraImageButton: ImageButton
+    private var barcode: String? = null // This will store the barcode after scanning.
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result ->
         if (result.contents != null) {
-            Toast.makeText(this, "Результат: ${result.contents}", Toast.LENGTH_LONG).show()
+            barcode = result.contents
+            Log.d(TAG, "Scanned: ${result.contents}")
+            val fragment = ProductFragment().apply {
+                arguments = Bundle().apply {
+                    putString("barcode", barcode)
+                }
+            }
+            // Replace the current fragment with the ProductFragment
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
         } else {
             Toast.makeText(this, "Сканирование отменено", Toast.LENGTH_SHORT).show()
         }
@@ -38,25 +47,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        previousListButton = findViewById(R.id.previous_list_button)
-        handInputButton = findViewById(R.id.hand_input_button)
-        cameraImageButton = findViewById(R.id.camera_image_button)
-
-        previousListButton.setOnClickListener {
-
+        // Initialize MenuFragment
+        val menuFragment = MenuFragment().apply {
+            // Pass button click listeners to MenuFragment
+            onCameraClickListener = { checkCameraPermissionAndScan() }
+            onPreviousListClickListener = { /* Handle previous list click */ }
+            onHandInputClickListener = { /* Handle hand input click */ }
         }
 
-        handInputButton.setOnClickListener {
-
-        }
-
-        cameraImageButton.setOnClickListener {
-
-            checkCameraPermissionAndScan()
-        }
+        // Display MenuFragment on start
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, menuFragment)
+            .commit()
     }
 
     private fun checkCameraPermissionAndScan() {
@@ -75,10 +79,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startScan() {
-        val options = ScanOptions()
-        options.setPrompt("Наведите на штрихкод")
-        options.setBeepEnabled(true)
-        options.setOrientationLocked(false)
+        val options = ScanOptions().apply {
+            setPrompt("Наведите на штрихкод")
+            setBeepEnabled(true)
+            setOrientationLocked(false)
+        }
         barcodeLauncher.launch(options)
     }
 }

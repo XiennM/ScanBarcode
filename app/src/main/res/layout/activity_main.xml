@@ -1,30 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_container"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:fitsSystemWindows="true"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:layout_width="match_parent"
+    android:fitsSystemWindows="true">
 
-    <Button
-        android:id="@+id/previous_list_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous_list_button" />
-
-    <Button
-        android:id="@+id/hand_input_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hand_input_button" />
-
-    <ImageButton
-        android:id="@+id/camera_image_button"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:background="#00FFFFFF"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_camera"/>
-</LinearLayout>
+</FrameLayout>
