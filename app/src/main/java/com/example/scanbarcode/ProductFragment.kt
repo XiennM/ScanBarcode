@@ -11,11 +11,9 @@ import com.bumptech.glide.Glide
 
 class ProductFragment : Fragment() {
 
-    // ViewBinding
     private var _binding: FragmentProductBinding? = null
     private val binding get() = _binding!!
 
-    // ViewModel
     private val viewModel: ProductViewModel by viewModels()
 
     override fun onCreateView(
@@ -29,22 +27,19 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Пример штрихкода — обычно приходит из аргументов или сканера
         val barcode = arguments?.getString("barcode")
         if (!barcode.isNullOrEmpty()) {
             viewModel.loadProduct(barcode)
         } else {
-            // показать сообщение "Штрихкод не получен"
+
         }
 
-        // Подписка на LiveData из ViewModel
         viewModel.product.observe(viewLifecycleOwner) { product ->
             if (product != null) {
                 binding.productName.text = product.name ?: "Без названия"
                 binding.productBrand.text = product.brands ?: "Без бренда"
                 binding.productIngredients.text = product.ingredients ?: "Нет состава"
 
-                // Загрузка изображения с помощью Glide
                 Glide.with(this)
                     .load(product.imageUrl)
                     .placeholder(R.drawable.placeholder_image)

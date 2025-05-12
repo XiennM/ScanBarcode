@@ -15,7 +15,7 @@ import com.journeyapps.barcodescanner.ScanOptions
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-    private var barcode: String? = null // This will store the barcode after scanning.
+    private var barcode: String? = null
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result ->
         if (result.contents != null) {
@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
                     putString("barcode", barcode)
                 }
             }
-            // Replace the current fragment with the ProductFragment
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)
                 .addToBackStack(null)
@@ -49,15 +48,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // Initialize MenuFragment
         val menuFragment = MenuFragment().apply {
-            // Pass button click listeners to MenuFragment
             onCameraClickListener = { checkCameraPermissionAndScan() }
-            onPreviousListClickListener = { /* Handle previous list click */ }
-            onHandInputClickListener = { /* Handle hand input click */ }
+            onHandInputClickListener = {  }
         }
 
-        // Display MenuFragment on start
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, menuFragment)
             .commit()
