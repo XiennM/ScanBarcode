@@ -3,7 +3,6 @@ package com.example.scanbarcode
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,21 +14,10 @@ import com.journeyapps.barcodescanner.ScanOptions
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
-    private var barcode: String? = null
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result ->
         if (result.contents != null) {
-            barcode = result.contents
-            Log.d(TAG, "Scanned: ${result.contents}")
-            val fragment = ProductFragment().apply {
-                arguments = Bundle().apply {
-                    putString("barcode", barcode)
-                }
-            }
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, fragment)
-                .addToBackStack(null)
-                .commit()
+            startProductFragment(result.contents)
         } else {
             Toast.makeText(this, "Сканирование отменено", Toast.LENGTH_SHORT).show()
         }
@@ -50,7 +38,8 @@ class MainActivity : AppCompatActivity() {
 
         val menuFragment = MenuFragment().apply {
             onCameraClickListener = { checkCameraPermissionAndScan() }
-            onHandInputClickListener = {  }
+            onHandInputClickListener = { barcode ->
+                startProductFragment(barcode) }
         }
 
         supportFragmentManager.beginTransaction()
@@ -80,5 +69,17 @@ class MainActivity : AppCompatActivity() {
             setOrientationLocked(false)
         }
         barcodeLauncher.launch(options)
+    }
+
+    private fun startProductFragment(barcode: String) {
+        val fragment = ProductFragment().apply {
+            arguments = Bundle().apply {
+                putString("barcode", barcode)
+            }
+        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }
