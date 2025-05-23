@@ -36,9 +36,10 @@ class ProductFragment : Fragment() {
 
         viewModel.product.observe(viewLifecycleOwner) { product ->
             if (product != null) {
-                binding.productName.text = product.name ?: "Без названия"
-                binding.productBrand.text = product.brands ?: "Без бренда"
-                binding.productIngredients.text = product.ingredients ?: "Нет состава"
+                binding.productName.text = product.displayName
+                binding.productBrand.text = product.displayBrand
+                binding.productIngredients.text = product.displayIngredients
+                binding.productQuantity.text = product.displayQuantity
 
                 Glide.with(this)
                     .load(product.imageUrl)
@@ -49,6 +50,7 @@ class ProductFragment : Fragment() {
                 binding.productName.text = "Продукт не найден"
                 binding.productBrand.text = ""
                 binding.productIngredients.text = ""
+                binding.productQuantity.text = ""
                 binding.productImage.setImageResource(R.drawable.ic_launcher_background)
             }
         }

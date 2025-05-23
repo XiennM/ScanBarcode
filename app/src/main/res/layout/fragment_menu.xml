@@ -7,16 +7,17 @@
 
     <Button
         android:id="@+id/hand_input_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ручной ввод" />
+        android:text="@string/hand_input_button" />
 
     <ImageButton
         android:id="@+id/camera_image_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:scaleType="fitCenter"
-        android:src="@android:drawable/ic_menu_camera"
+        android:adjustViewBounds="true"
+        android:src="@drawable/camera_new_new"
         android:contentDescription="Camera"
         android:background="?android:attr/selectableItemBackground" />
 </LinearLayout>

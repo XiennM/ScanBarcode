@@ -23,7 +23,7 @@ class ProductViewModel : ViewModel() {
     fun loadProduct(barcode: String) {
         viewModelScope.launch {
             try {
-                val response = api.getProduct(barcode)
+                val response = api.getProduct(barcode, language = "ru")
                 if (response.isSuccessful) {
                     _product.postValue(response.body()?.product)
                 } else {
