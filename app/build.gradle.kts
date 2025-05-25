@@ -42,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.constraintlayout)
     val appcompat_version = "1.7.0"
     val lifecycle_version = "2.9.0"
     val room_version = "2.7.1"

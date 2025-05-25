@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp">
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/hand_input_button"
@@ -15,9 +15,17 @@
         android:id="@+id/camera_image_button"
         android:layout_width="85dp"
         android:layout_height="85dp"
-        android:scaleType="fitCenter"
         android:adjustViewBounds="true"
-        android:src="@drawable/camera_new_new"
+        android:background="?android:attr/selectableItemBackground"
         android:contentDescription="Camera"
-        android:background="?android:attr/selectableItemBackground" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/camera_new_new" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="для сканирования нажмите на камеру"
+        android:textSize="11dp"/>
+
+
 </LinearLayout>

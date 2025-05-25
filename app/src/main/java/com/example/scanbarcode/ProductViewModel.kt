@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ProductViewModel : ViewModel() {
     private val retrofit = Retrofit.Builder()
-        .baseUrl("https://ru.openfoodfacts.org/")
+        .baseUrl("https://world.openfoodfacts.org/")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 

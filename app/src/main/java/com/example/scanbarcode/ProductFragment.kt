@@ -40,6 +40,23 @@ class ProductFragment : Fragment() {
                 binding.productBrand.text = product.displayBrand
                 binding.productIngredients.text = product.displayIngredients
                 binding.productQuantity.text = product.displayQuantity
+                binding.productCategories.text = product.displayCategories
+                binding.productAllergens.text = product.displayAllergens
+
+                if(product.isVegan.isNullOrEmpty())
+                    binding.productVegetarian.visibility = View.GONE
+                else
+                    binding.productVegetarian.text = product.isVegetarian
+
+                if(product.isVegan.isNullOrEmpty())
+                    binding.productVegan.visibility = View.GONE
+                else
+                    binding.productVegan.text = product.isVegan
+
+                binding.productProtein.text = product.displayProteins
+                binding.productFats.text = product.displayFats
+                binding.productCarbohydrates.text = product.displayCarbohydrates
+                binding.productEnergy.text = product.displayEnergy
 
                 Glide.with(this)
                     .load(product.imageUrl)
@@ -48,9 +65,6 @@ class ProductFragment : Fragment() {
                     .into(binding.productImage)
             } else {
                 binding.productName.text = "Продукт не найден"
-                binding.productBrand.text = ""
-                binding.productIngredients.text = ""
-                binding.productQuantity.text = ""
                 binding.productImage.setImageResource(R.drawable.ic_launcher_background)
             }
         }

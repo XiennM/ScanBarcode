@@ -1,18 +1,21 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_product"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:orientation="vertical"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
-    android:scrollbars="vertical">
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/productImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         android:src="@drawable/placeholder_image" />
 
     <LinearLayout
@@ -48,6 +51,7 @@
             android:id="@+id/productBrandTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Бренд: "
             android:textSize="16sp"
             android:paddingTop="8dp" />
@@ -72,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="8dp"
+            android:textStyle="bold"
             android:text="Количество: "
             android:textSize="14sp" />
 
@@ -93,6 +98,7 @@
             android:id="@+id/productIngredientsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textStyle="bold"
             android:text="Состав: "
             android:paddingTop="8dp"
             android:textSize="14sp" />
@@ -111,7 +117,123 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:id="@+id/productCategoriesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Категории: "
+            android:paddingTop="8dp"
+            android:textSize="14sp" />
 
+        <TextView
+            android:id="@+id/productCategories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:textSize="14sp" />
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/productAllergensTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="Аллергены: "
+            android:paddingTop="8dp"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/productAllergens"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/productVegetarian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/productVegan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:textSize="14sp" />
+
+    <TableLayout
+        android:id="@+id/productNutriments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:stretchColumns="1">
+
+        <TableRow>
+            <TextView
+                android:text="Белки"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+            <TextView
+                android:id="@+id/productProtein"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Жиры"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+            <TextView
+                android:id="@+id/productFats"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Углеводы"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+            <TextView
+                android:id="@+id/productCarbohydrates"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:text="Энергетическая ценность"
+                android:textStyle="bold"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+            <TextView
+                android:id="@+id/productEnergy"
+                android:padding="8dp"
+                android:background="@drawable/cell_boarder"/>
+        </TableRow>
+
+        <TextView
+            android:text="На 100 грамм продукта"
+            android:textSize="11dp"/>
+    </TableLayout>
+
 </LinearLayout>
+
+</ScrollView>
