@@ -11,14 +11,14 @@ import java.util.UUID
 @Dao
 interface ProductDao{
     @Query("SELECT * FROM product")
-    fun getCrimes(): LiveData<List<Product>>
+    fun getProducts(): LiveData<List<Product>>
 
     @Query("SELECT * FROM product WHERE id=(:id)")
-    fun getCrime(id: UUID): LiveData<Product?>
+    fun getProduct(id: UUID): LiveData<Product>
 
     @Update
-    fun updateCrime(product: Product)
+    fun updateProduct(product: Product)
 
     @Insert
-    fun addCrime(product: Product)
+    fun addProduct(product: Product)
 }

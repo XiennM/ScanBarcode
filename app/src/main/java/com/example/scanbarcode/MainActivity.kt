@@ -10,10 +10,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanOptions
+import java.util.UUID
 
 private const val TAG = "MainActivity"
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ProductListFragment.Callbacks {
 
     private val barcodeLauncher = registerForActivityResult(ScanContract()) { result ->
         if (result.contents != null) {
@@ -40,7 +41,9 @@ class MainActivity : AppCompatActivity() {
             onCameraClickListener = { checkCameraPermissionAndScan() }
             onHandInputClickListener = { barcode ->
                 startProductFragment(barcode) }
-        }
+            onListClickListener = {
+                startProductListFragment()}
+            }
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, menuFragment)
@@ -81,5 +84,19 @@ class MainActivity : AppCompatActivity() {
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
+    }
+
+    private fun startProductListFragment(){
+
+            val fragment = ProductListFragment.newInstance()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit()
+    }
+
+    override fun onProductSelected(productId: UUID) {
+        val fragment = ProductFragment.newInstance(productId)
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).addToBackStack(null).commit()
     }
 }

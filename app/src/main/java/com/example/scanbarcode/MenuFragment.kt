@@ -16,7 +16,9 @@ import com.example.scanbarcode.databinding.FragmentMenuBinding
 class MenuFragment : Fragment() {
     private lateinit var handInputButton: Button
     private lateinit var cameraImageButton: ImageButton
+    private lateinit var listButton: Button
 
+    var onListClickListener: (() -> Unit)? = null
     var onCameraClickListener: (() -> Unit)? = null
     var onHandInputClickListener: ((String) -> Unit)? = null
 
@@ -28,6 +30,7 @@ class MenuFragment : Fragment() {
 
         handInputButton = binding.handInputButton
         cameraImageButton = binding.cameraImageButton
+        listButton = binding.listButton
 
         handInputButton.setOnClickListener {
             showManualInputDialog()
@@ -35,6 +38,10 @@ class MenuFragment : Fragment() {
 
         cameraImageButton.setOnClickListener {
             onCameraClickListener?.invoke()
+        }
+
+        listButton.setOnClickListener {
+            onListClickListener?.invoke()
         }
 
         return binding.root

@@ -1,9 +1,6 @@
 package com.example.scanbarcode
 
 import androidx.room.Entity
-import com.google.gson.annotations.SerializedName
-import com.example.scanbarcode.data.AllergenTranslations
-import com.example.scanbarcode.data.CategoryTranslations
 import androidx.room.PrimaryKey
 import java.util.Date
 import java.util.UUID
@@ -16,85 +13,29 @@ data class Product(
 
     var date: Date = Date(),
 
-    @SerializedName("product_name_ru")
-    val nameRu: String?,
+    val name: String,
 
-    @SerializedName("product_name")
-    val nameEn: String?,
+    val brands: String,
 
-    @SerializedName("brands")
-    val brands: String?,
-
-    @SerializedName("image_url")
     val imageUrl: String?,
 
-    @SerializedName("ingredients_text_ru")
-    val ingredientsRu: String?,
+    val ingredients: String,
 
-    @SerializedName("ingredients_text")
-    val ingredientsEn: String?,
+    val quantity: String,
 
-    @SerializedName("quantity")
-    val quantity: String?,
+    val categoriesTags: String,
 
-    @SerializedName("categories_tags")
-    val categoriesTags: List<String>?,
+    val allergensTags: String? = null,
 
-    @SerializedName("allergens_tags")
-    val allergensTags: List<String>? = null,
+    val isVegeterian: String?,
 
-    @SerializedName("labels_tags")
-    val labelsTags: List<String>? = null,
+    val isVegan: String?,
 
-    @SerializedName("nutriments")
-    val nutriments: Nutriments?
-) {
-    val displayName: String
-        get() = nameRu ?: nameEn ?: "Название неизвестно"
+    val proteins: String,
 
-    val displayIngredients: String
-        get() = ingredientsRu ?: ingredientsEn ?: "Нет информации об ингредиентах"
+    val fats: String,
 
-    val displayBrand: String
-        get() = brands ?: "Бренд не указан"
+    val carbohydrates: String,
 
-    val displayQuantity: String
-        get() = quantity ?: "Количество не указано"
-
-    val displayCategories: String
-        get() {
-            if (categoriesTags.isNullOrEmpty()) return "Категории не указаны"
-            return categoriesTags.joinToString(", ") {
-                CategoryTranslations.map[it] ?: it.removePrefix("en:").replace("-", " ")
-                    .replaceFirstChar { it.uppercase() }
-            }
-        }
-
-    val displayAllergens: String
-        get() {
-            if (allergensTags.isNullOrEmpty()) return "Аллергены не указаны"
-            return allergensTags.joinToString(", ") {
-                AllergenTranslations.map[it] ?: it.removePrefix("en:").replace("-", " ")
-                    .replaceFirstChar { c -> c.uppercase() }
-            }
-        }
-
-    val isVegetarian: String?
-        get() = if (labelsTags?.any { it == "en:vegetarian" || it == "en:vegetarian-products" } == true) "Продукт подходит для вегетерианцев" else null
-
-    val isVegan: String?
-        get() = if (labelsTags?.any { it == "en:vegan" || it == "en:vegan-products" } == true) "Продукт подходит для веганов" else null
-
-    val displayProteins: String
-        get() = nutriments?.proteins?.let { "$it г" } ?: "-"
-
-    val displayFats: String
-        get() = nutriments?.fat?.let { "$it г" } ?: "-"
-
-    val displayCarbohydrates: String
-        get() = nutriments?.carbohydrates?.let { "$it г" } ?: "-"
-
-    val displayEnergy: String
-        get() = nutriments?.energy?.let { "$it кДж" } ?: "-"
-
-}
+    val energy: String
+)
