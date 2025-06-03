@@ -45,8 +45,7 @@ class MenuFragment : Fragment() {
         editText.inputType = InputType.TYPE_CLASS_NUMBER
 
         AlertDialog.Builder(requireContext())
-            .setTitle("Ручной ввод штрихкода")
-            .setMessage("Введите штрихкод вручную")
+            .setTitle("Введите штрихкод")
             .setView(editText)
             .setPositiveButton("OK") { _, _ ->
                 val inputBarcode = editText.text.toString().trim()
